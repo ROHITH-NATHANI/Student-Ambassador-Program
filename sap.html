@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Ambassador Program</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Arial', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      transition: opacity 0.5s ease;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .visible {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Header Section */
+    header {
+      background: linear-gradient(to right, #eb6906, #f1de0e);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .logo-img {
+      height: 55px; /* Adjust height as needed */
+      width: auto; /* Maintain aspect ratio */
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #fef08a;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://taskmo.com/assets/img/campus%20ambassador.jpg') center/cover no-repeat;
+      color: #fbf6f6;
+      text-align: center;
+      padding: 5rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta {
+      background: #ffd700;
+      color: #333;
+      padding: 0.8rem 2rem;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Section Styling */
+    section {
+      padding: 4rem 2rem;
+      width: 100%;
+      background: rgba(254, 254, 255, 0.95);
+      border-radius: 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #7c2d12;
+    }
+
+    /* Mission Section */
+    .mission-content {
+      text-align: center;
+      font-size: 1.1rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .team-card {
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .team-card .front, .team-card .back {
+      backface-visibility: hidden;
+      transition: transform 0.6s;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .team-card .front {
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-card .front img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .team-card .back {
+      background: linear-gradient(to bottom, #f97316, #7c2d12);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      transform: rotateY(180deg);
+    }
+
+    .team-card:hover .front {
+      transform: rotateY(-180deg);
+    }
+
+    .team-card:hover .back {
+      transform: rotateY(0deg);
+    }
+
+    /* Highlights Section */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .highlight-card {
+      background: #fff;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .highlight-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Benefits Section */
+    .accordion-item {
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .accordion-header {
+      background: #f97316;
+      color: #fff;
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .accordion-content {
+      background: #f5f5f5;
+      padding: 1rem;
+      display: none;
+    }
+
+    .accordion-content.active {
+      display: block;
+    }
+
+    /* Timeline Section */
+    .timeline-container {
+      position: relative;
+      padding: 2rem 0;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transition: opacity 0.6s, transform 0.6s;
+      width: 100%;
+      position: relative;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      position: relative;
+      border-left: 4px solid #f97316;
+    }
+
+    .timeline-icon {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background: #f97316;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      order: 1;
+    }
+
+    .timeline-prompt {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    /* Testimonials Section */
+    .testimonial-container {
+      position: relative;
+      padding: 0 2rem;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .testimonial {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial.active {
+      display: block;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #f97316;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .contact-item {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .contact-item:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Join Form Section */
+    .join {
+      position: relative;
+      width: 100%;
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      color: #28a745;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .success-message.active {
+      display: block;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: #f5f5f5;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #f97316;
+      width: 0;
+      transition: width 0.3s;
+    }
+
+    #join-form {
+      padding: 0 2rem;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #f97316;
+      outline: none;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      color: #666;
+      transition: all 0.3s;
+      pointer-events: none;
+      background: #fff;
+      padding: 0 0.3rem;
+    }
+
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:not(:placeholder-shown) + label,
+    .form-group input:focus + label,
+    .form-group textarea:focus + label {
+      top: -0.6rem;
+      font-size: 0.8rem;
+      color: #f97316;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      grid-column: span 2;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    #join-form button {
+      background: #f97316;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+      grid-column: span 2;
+    }
+
+    #join-form button:hover {
+      background: #7c2d12;
+    }
+
+    /* Footer Section */
+    footer {
+      background: #7c2d12;
+      color: #fff;
+      padding: 3rem 2rem;
+      width: 100%;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .footer-container h3 {
+      margin-bottom: 1rem;
+    }
+
+    .footer-container ul {
+      list-style: none;
+    }
+
+    .footer-container ul li a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-container ul li a:hover {
+      color: #ffd700;
+    }
+
+    .social-icons a {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: #ffd700;
+    }
+
+    .newsletter form {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .newsletter input {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      flex: 1;
+    }
+
+    .newsletter button {
+      background: #f97316;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .newsletter button:hover {
+      background: #ffd700;
+      color: #333;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #f97316;
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      transition: opacity 0.3s;
+    }
+
+    .back-to-top.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .logo-img {
+        height: 40px; /* Slightly smaller logo for mobile */
+      }
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      .prev-btn {
+        left: 10px;
+      }
+      .next-btn {
+        right: 10px;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      .newsletter form {
+        flex-direction: column;
+      }
+      .newsletter input {
+        width: 100%;
+      }
+      .timeline-item {
+        flex-direction: column !important;
+      }
+      .timeline-content {
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .timeline-icon {
+        margin: 1rem 0;
+        position: static;
+        transform: none;
+      }
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group textarea,
+      .form-group.full-width,
+      #join-form button {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+      <a href="#home" class="logo">
+        <img src="C:\Users\ROHIT\Pictures\Screenshots\Screenshot 2025-07-08 195543.png" alt="Student Ambassador Program Logo" class="logo-img">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#highlights">Why Join</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#timeline">Journey</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#join">Apply</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <marquee behavior="scroll" direction="left" scrollamount="6" style="color: #ed6307; background-color: #e8e408; padding: 10px; font-size: 18px;">
+🎓 Join our Student Ambassador Program – Be the Voice of Your Campus! 🚀 Apply Now!
+</marquee>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero animate-on-scroll">
+    <h1>Join the Student Ambassador Program</h1>
+    <p>Unlock leadership opportunities and build your future!</p>
+    <a href="#join" class="cta">Apply Now</a>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="mission animate-on-scroll">
+    <h2>Our Mission</h2>
+    <div class="mission-content">
+      <p>We aim to empower students to become future leaders by providing opportunities to develop leadership, communication, and networking skills through impactful campus initiatives and community engagement.</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="team animate-on-scroll">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="front">
+          <img src="data:image/jpeg;base64,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" alt="Team Member 1">
+          <h3>Dr. Sarah Johnson</h3>
+          <p>Program Director</p>
+        </div>
+        <div class="back">
+          <h3>Dr. Sarah Johnson</h3>
+          <p>Leads the program with 10+ years of experience in education and leadership development.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="front">
+          <img src="data:image/jpeg;base64,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" alt="Team Member 2">
+          <h3>Michael Lee</h3>
+          <p>Outreach Coordinator</p>
+        </div>
+        <div class="back">
+          <h3>Michael Lee</h3>
+          <p>Manages camper events and student engagement initiatives.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="front">
+          <img src="data:image/jpeg;base64,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" alt="Team Member 3">
+          <h3>Emily Chen</h3>
+          <p>Mentorship Lead</p>
+        </div>
+        <div class="back">
+          <h3>Emily Chen</h3>
+          <p>Guides ambassadors through personalized mentorship programs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights Section -->
+  <section id="highlights" class="highlights animate-on-scroll">
+    <h2>Why Join Us?</h2>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <div class="icon">🚀</div>
+        <h3>Leadership Skills</h3>
+        <p>Lead campus events and initiatives.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">🤝</div>
+        <h3>Networking</h3>
+        <p>Connect with industry professionals.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">📚</div>
+        <h3>Skill Building</h3>
+        <p>Gain hands-on experience in outreach.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">🎓</div>
+        <h3>Certifications</h3>
+        <p>Earn certificates for your resume.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="benefits animate-on-scroll">
+    <h2>Program Benefits</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">What is the Student Ambassador Program?</div>
+        <div class="accordion-content">
+          <p>A platform for students to develop leadership, networking, and outreach skills by representing our organization on campus.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Who can apply?</div>
+        <div class="accordion-content">
+          <p>Any enthusiastic student with a passion for leadership and community engagement can apply.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">What are the responsibilities?</div>
+        <div class="accordion-content">
+          <p>Organize events, promote initiatives, and connect with peers and professionals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline" class="timeline animate-on-scroll">
+    <h2>Your Ambassador Journey</h2>
+    <p class="timeline-prompt">Embark on a transformative journey to develop leadership and professional skills through our structured ambassador program.</p>
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Application</h3>
+          <p>Submit your application to join the program.</p>
+        </div>
+        <div class="timeline-icon">📝</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Training</h3>
+          <p>Attend workshops to prepare for your role.</p>
+        </div>
+        <div class="timeline-icon">🎓</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Events</h3>
+          <p>Organize and lead campus initiatives.</p>
+        </div>
+        <div class="timeline-icon">🎉</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>Recognition</h3>
+          <p>Receive certificates and rewards.</p>
+        </div配备
+        <div class="timeline-icon">🏆</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials animate-on-scroll">
+    <h2>What Ambassadors Say</h2>
+    <div class="testimonial-container">
+      <div class="testimonial active">
+        <p>"This program transformed my confidence and career path!"</p>
+        <div class="author">Alex S.</div>
+        <div class="role">2024 Ambassador</div>
+      </div>
+      <div class="testimonial">
+        <p>"I built lifelong connections and skills!"</p>
+        <div class="author">Priya M.</div>
+        <div class="role">2023 Ambassador</div>
+      </div>
+      <div class="testimonial">
+        <p>"Organizing events was so rewarding!"</p>
+        <div class="author">James T.</div>
+        <div class="role">2024 Ambassador</div>
+      </div>
+      <button class="nav-btn prev-btn" aria-label="Previous testimonial">❮</button>
+      <button class="nav-btn next-btn" aria-label="Next testimonial">❯</button>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact" class="contact animate-on-scroll">
+    <h2>Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="icon">📧</div>
+        <p>Email: <a href="mailto:info@sap.org">info@sap.org</a></p>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📞</div>
+        <p>Phone: +1 (555) 123-4567</p>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        <p>Address: 123 Campus Way, Education City</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Form Section -->
+  <section id="join" class="join animate-on-scroll">
+    <h2>Apply to Join</h2>
+    <p class="success-message">Thank you for applying! We'll get back to you soon.</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <form id="join-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <input type="text" id="name" placeholder=" " required aria-label="Your Name">
+          <label for="name">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder=" " required aria-label="Your Email">
+          <label for="email">Your Email</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="university" placeholder=" " required aria-label="Your University">
+          <label for="university">Your University</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="year" placeholder=" " required aria-label="Year of Study">
+          <label for="year">Year of Study</label>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="phone" placeholder=" " required aria-label="Phone Number">
+          <label for="phone">Phone Number</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="major" placeholder=" " required aria-label="Major">
+          <label for="major">Major</label>
+        </div>
+        <div class="form-group full-width">
+          <textarea id="message" placeholder=" " required aria-label="Reason for joining"></textarea>
+          <label for="message">Why do you want to join?</label>
+        </div>
+      </div>
+      <button type="submit">Submit Application</button>
+    </form>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="animate-on-scroll">
+    <div class="footer-container">
+      <div>
+        <h3>About SAP</h3>
+        <ul>
+          <li><a href="#mission">Our Mission</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect With Us</h3>
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter" data-tooltip="Twitter">𝕏</a>
+          <a href="#" aria-label="Instagram" data-tooltip="Instagram">📷</a>
+          <a href="#" aria-label="LinkedIn" data-tooltip="LinkedIn">🔗</a>
+        </div>
+      </div>
+      <div class="newsletter">
+        <h3>Stay Updated</h3>
+        <form>
+          <input type="email" placeholder="Enter your email" required aria-label="Newsletter Email">
+          <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Student Ambassador Program. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script>
+    // Scroll Animations
+    const animateSections = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    animateSections.forEach(section => observer.observe(section));
+
+    // Testimonial Carousel
+    const testimonials = document.querySelectorAll('.testimonial');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentIndex = 0;
+
+    function showTestimonial(index, direction) {
+      testimonials[currentIndex].classList.remove('active');
+      if (direction === 'next') {
+        testimonials[currentIndex].classList.add('prev');
+      } else {
+        testimonials[currentIndex].classList.add('next');
+      }
+      currentIndex = index;
+      testimonials[currentIndex].classList.remove('prev', 'next');
+      testimonials[currentIndex].classList.add('active');
+    }
+
+    function nextTestimonial() {
+      const nextIndex = (currentIndex + 1) % testimonials.length;
+      showTestimonial(nextIndex, 'next');
+    }
+
+    function prevTestimonial() {
+      const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(prevIndex, 'prev');
+    }
+
+    nextBtn.addEventListener('click', nextTestimonial);
+    prevBtn.addEventListener('click', prevTestimonial);
+    setInterval(nextTestimonial, 5000);
+
+    // Accordion
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+      });
+    });
+
+    // Timeline Animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    timelineItems.forEach(item => timelineObserver.observe(item));
+
+    // Form Submission and Progress Bar
+    const form = document.getElementById('join-form');
+    const successMessage = document.querySelector('.success-message');
+    const progressFill = document.querySelector('.progress-fill');
+    const inputs = form.querySelectorAll('input, textarea');
+
+    function updateProgress() {
+      const totalFields = inputs.length;
+      let filledFields = 0;
+      inputs.forEach(input => {
+        if (input.value.trim()) filledFields++;
+      });
+      const progress = (filledFields / totalFields) * 100;
+      progressFill.style.width = `${progress}%`;
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('input', updateProgress);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const university = document.getElementById('university').value.trim();
+      const year = document.getElementById('year').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const major = document.getElementById('major').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (name && email && university && year && phone && major && message) {
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          if (/^\+?\d{10,15}$/.test(phone)) {
+            successMessage.classList.add('active');
+            form.style.display = 'none';
+            form.reset();
+            progressFill.style.width = '0%';
+          } else {
+            alert('Please enter a valid phone number!');
+          }
+        } else {
+          alert('Please enter a valid email address!');
+        }
+      } else {
+        alert('Please fill out all fields!');
+      }
+    });
+
+    // Back to Top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
